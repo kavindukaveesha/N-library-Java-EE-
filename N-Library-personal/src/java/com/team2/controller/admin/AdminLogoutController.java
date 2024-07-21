@@ -15,6 +15,6 @@ public class AdminLogoutController extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
 
-        response.sendRedirect("/N-Library/login");
+        response.sendRedirect("/N-Library-personal/login");
     }
 }

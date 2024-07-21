@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="com.team2.controller.utill.assetsUrl"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,11 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqk1wZxL+h7yzfrPLIXD" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="<%=assetsUrl.giveUrl(request, "styles/admin.css")%>"/>
-
+        <style>
+            .homecard{
+                height: 8rem;
+            }
+        </style>
 
     </head>
 
@@ -26,8 +32,7 @@
         <div class="content">
             <%@ include file="/views/Admin/admincommon/header.jsp" %>
             <!--get numbers of lists data-->
-            <%
-                Object numberOfStudentsObj = request.getAttribute("number_of_students");
+            <%                Object numberOfStudentsObj = request.getAttribute("number_of_students");
                 Object numberOfAdminsObj = request.getAttribute("number_of_admins");
                 Object numberOfCategoriesObj = request.getAttribute("number_of_categories");
 
@@ -48,58 +53,18 @@
 
             %>
             <div class="row">
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Available Books</h5>
-                            <h2 class="card-text"><%= numberOfStudents%></h2>
+                <%     List<Map<String, Object>> cardData = (List<Map<String, Object>>) request.getAttribute("cardData");
+                %>
 
-                        </div>
-                    </div>
-                </div>
+                <% for (Map<String, Object> card : cardData) {%>
                 <div class="col-md-2">
-                    <div class="card">
+                    <div class="card homecard">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Students</h5>
-                            <h2 class="card-text"><%= numberOfStudents%></h2>
-
-                        </div>
+                            <div class="card-title"> <h5><%= card.get("title") %> </h5></div>
+                          <h2 class="card-text" style="position: absolute; bottom: 0.5rem; left: 50%; transform: translateX(-50%);"> <%= card.get("value") %> </h2>   </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Borrowed Books</h5>
-                            <h2 class="card-text">250</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title"> Returned Books</h5>
-                            <h2 class="card-text">250</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Books Categories</h5>
-                            <h2 class="card-text"><%= numberOfCategories%></h2>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Admins</h5>
-                            <h2 class="card-text"><%= numberOfAdmins%></h2>
-
-                        </div>
-                    </div>
-                </div>
+                <% }%>
             </div>
 
             <div class="row mt-4">

@@ -2,6 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/SOFTWERE%20ENGENEERING/My-Projects/N-library-Java-EE-/N-Library-personal/web/views/Admin/students/show_students.jsp</file>
+            <file>file:/D:/SOFTWERE%20ENGENEERING/My-Projects/N-library-Java-EE-/N-Library-personal/src/java/com/team2/controller/admin/AdminStudentController.java</file>
+            <file>file:/D:/SOFTWERE%20ENGENEERING/My-Projects/N-library-Java-EE-/N-Library-personal/src/java/com/team2/service/UserService.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -1,5 +1,6 @@
 package com.team2.controller.admin;
 
+import com.team2.Enums.UserType;
 import com.team2.controller.utill.PasswordGenarator;
 import com.team2.models.User;
 import com.team2.service.UserService;
@@ -31,7 +32,8 @@ import javax.servlet.http.Part;
     "/admin/students/update",
     "/admin/students/",
     "/admin/students/find",
-    "/admin/students/changeStatus"
+    "/admin/students/changeStatus",
+    "/admin/students/search"
 
 })
 @MultipartConfig
@@ -44,7 +46,7 @@ public class AdminStudentController extends HttpServlet {
     }
 
 //    folder path
-    private static final String UPLOAD_PATH = "D:/SOFTWERE ENGENEERING/my programing/Java/Java EE/N_Library/N-Library/web/DBImages/";
+    private static final String UPLOAD_PATH = "D:/SOFTWERE ENGENEERING/My-Projects/N-library-Java-EE-/N-Library-personal/web/DBImages/";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -79,6 +81,9 @@ public class AdminStudentController extends HttpServlet {
                     break;
                 case "/admin/students/changeStatus":
                     changeStatus(request, response);
+                    break;
+                case "/admin/students/search":
+                    searchStudent(request, response);
                     break;
                 default:
                     break;
@@ -170,8 +175,9 @@ public class AdminStudentController extends HttpServlet {
 
 //        end of upload image
 //upload data to databse
+        UserType userType = UserType.STUDENT;
         User student = new User(0, firstName, lastName, userNic, imageFileName,
-                email, phoneNumber, address, password, true, "student");
+                email, phoneNumber, address, password, true, userType);
         int insertedId = userService.addUser(student);
 //upload data to databse
 
@@ -243,7 +249,7 @@ public class AdminStudentController extends HttpServlet {
             imageFileName = dbImage;
         }
 
-        User student = new User(firstName, lastName, userNic, imageFileName, email, phoneNumber, address,userId);
+        User student = new User(firstName, lastName, userNic, imageFileName, email, phoneNumber, address, userId);
         boolean updated = userService.updateUser(student);
 
         if (updated) {
@@ -301,5 +307,42 @@ public class AdminStudentController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-   
+    public void searchStudent(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        String type = request.getParameter("selectType");
+        String search = request.getParameter("query");
+
+        try (PrintWriter out = response.getWriter()) {
+            out.print(type + search);
+
+            if ("studentId".equals(type)) {
+                try {
+                    int searchInt = Integer.parseInt(search);
+                    List<User> students = userService.findStudentByID("STUDENT", searchInt);
+                    request.setAttribute("students1", students);
+                } catch (NumberFormatException e) {
+                    request.setAttribute("error", "Invalid student ID format");
+                }
+            } else {
+                request.setAttribute("error", "Invalid search type");
+            }
+            
+            if ("firstName".equals(type)) {
+                try {
+                    List<User> students = userService.findStudentByFirstName("STUDENT", search);
+                    request.setAttribute("students1", students);
+                } catch (NumberFormatException e) {
+                    request.setAttribute("error", "Invalid student ID format");
+                }
+            } else {
+                request.setAttribute("error", "Invalid search type");
+            }
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/views/Admin/students/show_students.jsp");
+            dispatcher.forward(request, response);
+        } catch (IOException e) {
+            throw new ServletException("Error processing search", e);
+        }
+    }
+
 }

@@ -1,6 +1,6 @@
 <%@page import="com.team2.controller.utill.assetsUrl"%>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-    <a class="navbar-brand text-white text-center" href="#">N-Library</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand text-white text-center mx-2" href="#">N-Library</a>
 
     <!-- Hamburger Menu Button -->
     <button class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +8,7 @@
     </button>
 
     <!-- Profile Image and Name -->
-    <a class="nav-item nav-link profile" href="#" id="profileSection">
+    <a class="nav-item nav-link profile mt-1 mr-2" href="#" id="profileSection">
         Kavindu
         <img src="<%=assetsUrl.giveUrl(request, "Images/download.jpg")%>" alt="Profile" class="img-fluid rounded-circle ml-2" width="30" style="height: 2rem;">
     </a>

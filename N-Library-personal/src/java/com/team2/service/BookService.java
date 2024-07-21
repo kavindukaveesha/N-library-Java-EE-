@@ -8,7 +8,8 @@ import java.util.List;
 
 public class BookService {
 
-    private static final String INSERT_QUERY = "INSERT INTO books (title, bookId, author, categoryId, quantity, description, image, available) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_QUERY = 
+            "INSERT INTO books (title, bookId, author, categoryId, quantity, description, image, available) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_QUERY = "UPDATE books SET title = ?, bookId = ?, author = ?, categoryId = ?, quantity = ?, description = ?, image = ?, available = ? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM books WHERE id = ?";
     private static final String SELECT_BY_ID_QUERY = "SELECT * FROM books WHERE id = ?";
@@ -18,13 +19,15 @@ public class BookService {
     public int addBook(Books book) {
         try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, book.getTitle());
-            statement.setString(2, book.getAuthor());
-            statement.setInt(3, book.getCategoryId());
-            statement.setInt(4, book.getQuantity());
-            statement.setString(5, book.getDescription());
-            statement.setString(6, book.getImage());
-            statement.setInt(7, book.getId());
+            statement.setString(1, book.getTitle()); 
+            statement.setString(2, book.getBookId());
+            statement.setString(3, book.getAuthor());
+            statement.setInt(4, book.getCategoryId());
+            statement.setInt(5, book.getQuantity());
+            statement.setString(6, book.getDescription());
+            statement.setString(7, book.getImage());
+            statement.setBoolean(8, book.getAvailable());
+
 
             statement.executeUpdate();
 
@@ -42,7 +45,7 @@ public class BookService {
     public boolean updateBook(Books book) {
         try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
-            statement.setString(1, book.getTitle());
+            statement.setString(1, book.getTitle()); 
             statement.setString(2, book.getBookId());
             statement.setString(3, book.getAuthor());
             statement.setInt(4, book.getCategoryId());

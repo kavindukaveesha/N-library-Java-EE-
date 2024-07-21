@@ -1,5 +1,6 @@
 
 
+<%@page import="com.team2.models.User"%>
 <!DOCTYPE html>
 <html lang="en">
 

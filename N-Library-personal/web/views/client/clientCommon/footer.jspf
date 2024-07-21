@@ -1,66 +1,103 @@
-<%@page import="com.team2.controller.utill.assetsUrl"%>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-    <a class="navbar-brand text-white text-center" href="#">N-Library</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Library Footer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .footer {
+            width: 100%;
+            background-color: #007bff; /* Blue background */
+            color: #fff; /* White text */
+            padding: 30px 0; /* Add padding for better spacing */
+        }
 
-    <!-- Hamburger Menu Button -->
-    <button class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        .footer h5 {
+            color: #f0f0f0; /* Slightly lighter white for headings */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    <!-- Profile Image and Name -->
-    <a class="nav-item nav-link profile" href="#" id="profileSection">
-        Kavindu
-        <img src="<%=assetsUrl.giveUrl(request, "Images/download.jpg")%>" alt="Profile" class="img-fluid rounded-circle ml-2" width="30" style="height: 2rem;">
-    </a>
+        .footer a {
+            color: #fff; /* White links */
+            text-decoration: none;
+        }
 
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="${pageContext.request.contextPath}/student/home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="${pageContext.request.contextPath}/student/my-books">Borrowed Books</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="${pageContext.request.contextPath}/student/profile">Profile</a>
-            </li>
-        </ul>
+        .footer a:hover {
+            color: #e0e0e0; /* Light grey on hover */
+        }
+
+        .footer .list-inline-item {
+            margin-right: 15px; /* Spacing between social icons */
+        }
+
+        .footer .list-inline-item a {
+            font-size: 20px; /* Larger icon size */
+            transition: color 0.3s; /* Smooth hover transition */
+        }
+
+        .footer .list-inline-item a:hover {
+            color: #f0f0f0; /* Light grey on hover */
+        }
+
+        .footer hr {
+            border-top: 1px solid #444; /* Subtle horizontal line */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .footer .col-md-4 {
+                margin-bottom: 20px; /* Add space between columns */
+            }
+        }
+
+        /* Responsive adjustments for extra small screens */
+        @media (max-width: 576px) {
+            .footer .col-md-4 {
+                width: 100%; /* Make columns full width */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About Us</h5>
+                <p>N-Library is a modern digital library platform providing access to a vast collection of books, ebooks, and other resources.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Borrowed Books</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Social Media</h5>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-0">© 2024 N-Library. All rights reserved.</p>
+            </div>
+        </div>
     </div>
-</nav>
+</footer>
 
-<style>
-    @media (min-width: 992px) {
-        .profile {
-            order: 1;
-        }
-    }
-    @media (max-width: 992px) {
-        .navbar-nav {
-            flex-direction: column;
-            text-align: center;
-        }
-        .navbar-nav .nav-item {
-            margin-bottom: 10px;
-        }
-        .navbar-nav .nav-item:hover{
-            background-color: rgba(255, 255, 255, 0.5);
-
-        }
-        .navbar-nav .nav-item:last-child {
-            margin-bottom: 0;
-        }
-        .navbar-toggler {
-            order: -1;
-        }
-        .profile {
-            order: 1;
-        }
-        .hidden {
-            display: none;
-        }
-    }
-
-</style>
-
-
+</body>
+</html>

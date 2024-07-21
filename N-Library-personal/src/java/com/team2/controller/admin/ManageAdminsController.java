@@ -1,5 +1,6 @@
 package com.team2.controller.admin;
 
+import com.team2.Enums.UserType;
 import com.team2.controller.utill.PasswordGenarator;
 import com.team2.models.User;
 import com.team2.service.UserService;
@@ -41,8 +42,7 @@ public class ManageAdminsController extends HttpServlet {
         this.userService = new UserService();
     }
 
-    private static final String UPLOAD_PATH = "D:/SOFTWERE ENGENEERING/my programing/Java/Java EE/N_Library/N-Library/web/DBImages/";
-
+  private static final String UPLOAD_PATH = "D:/SOFTWERE ENGENEERING/My-Projects/N-library-Java-EE-/N-Library-personal/web/DBImages/";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -165,8 +165,10 @@ public class ManageAdminsController extends HttpServlet {
 
 //        end of upload image
 //upload data to databse
+        UserType userTypeAdmin = UserType.ADMIN; 
+
         User student = new User(0, firstName, lastName, userNic, imageFileName,
-                email, phoneNumber, address, password, true, "admin");
+                email, phoneNumber, address, password, true,userTypeAdmin);
         int insertedId = userService.addUser(student);
 //upload data to databse
 

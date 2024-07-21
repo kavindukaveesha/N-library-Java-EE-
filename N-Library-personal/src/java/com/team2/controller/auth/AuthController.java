@@ -47,18 +47,18 @@ public class AuthController extends HttpServlet {
 
         if (userService.loginUser(email, password, session)) {
             User user = (User) session.getAttribute("loggedInUser");
-            String userType = user.getUserType();
+            String userType = user.getUserType().toString();
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("username", user.getFirstName() + " " + user.getLastName());
             session.setAttribute("userImage", user.getImage());
 
-            if ("student".equalsIgnoreCase(userType)) {
+            if ("STUDENT".equalsIgnoreCase(userType)) {
                 request.setAttribute("status", "loginSuccess");
-                response.sendRedirect("/N-Library/student/home");
+                response.sendRedirect("/N-Library-personal/student/home");
 
-            } else if ("admin".equalsIgnoreCase(userType)) {
+            } else if ("ADMIN".equalsIgnoreCase(userType)) {
                 request.setAttribute("status", "loginSuccess");
-                response.sendRedirect("/N-Library/admin/home");
+                response.sendRedirect("/N-Library-personal/admin/home");
 
             } else {
                 request.setAttribute("status", "loginError");

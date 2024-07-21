@@ -1,5 +1,6 @@
 package com.team2.service;
 
+import com.team2.Enums.UserType;
 import com.team2.controller.utill.DBConnection;
 import com.team2.models.User;
 import java.sql.*;
@@ -15,6 +16,10 @@ public class UserService {
     private static final String SELECT_BY_ID_QUERY = "SELECT * FROM user WHERE userId = ?";
     private static final String SELECT_ALL_QUERY = "SELECT * FROM user WHERE userType = ?"; // Added WHERE clause to filter by userType
     private static final String SELECT_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email = ?";
+    private static final String CHANGE_USER_PASSWORD = "UPDATE user SET password = ? WHERE userId = ?";
+    private static final String SELECT_BY_STUDENTID = "SELECT * FROM user WHERE userType = ? AND userId = ?";
+    private static final String SELECT_BY_STUDENT_BY_FIRST_NAME = "SELECT * FROM user WHERE userType = ? AND firstName = ?";
+    private static final String SELECT_BY_STUDENT_BY_LAST_NAME = "SELECT * FROM user WHERE userType = ? AND lastName = ?";
 
     // Add a new user
     public int addUser(User user) {
@@ -29,7 +34,7 @@ public class UserService {
             statement.setString(7, user.getAddress());
             statement.setString(8, user.getPassword());
             statement.setBoolean(9, user.isActive());
-            statement.setString(10, user.getUserType());
+            statement.setString(10, user.getUserType().toString());
 
             statement.executeUpdate();
 
@@ -119,6 +124,44 @@ public class UserService {
         return usersList;
     }
 
+// Get all user by id (with a filter for student type)
+    public List<User> findStudentByID(String userType, int userId) {
+        List<User> usersList = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SELECT_BY_STUDENTID)) {
+            statement.setString(1, userType);
+            statement.setInt(2, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                User user = mapResultSetToUser(resultSet);
+                usersList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usersList;
+    }
+
+    // Get all user by first name (with a filter for student type)
+    public List<User> findStudentByFirstName(String userType,String firstName) {
+        List<User> usersList = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SELECT_BY_STUDENT_BY_FIRST_NAME)) {
+            statement.setString(1, userType);
+            statement.setString(2, firstName);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                User user = mapResultSetToUser(resultSet);
+                usersList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usersList;
+    }
+
     // Get a user by ID
     public User showUserById(int userId) {
         try (Connection connection = DBConnection.getConnection();
@@ -170,6 +213,20 @@ public class UserService {
     public void logoutUser(HttpSession session) {
         session.invalidate();
     }
+//    change user password
+
+    public boolean changeUserPassword(int userId, String newPassword) {
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(CHANGE_USER_PASSWORD)) {
+            statement.setString(1, newPassword);
+            statement.setInt(2, userId);
+
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Return false if an error occurred
+    }
 
     // Helper method to map ResultSet to User object
     private User mapResultSetToUser(ResultSet resultSet) throws SQLException {
@@ -183,7 +240,12 @@ public class UserService {
         String address = resultSet.getString("address");
         String password = resultSet.getString("password");
         boolean active = resultSet.getBoolean("active");
-        String userType = resultSet.getString("userType");
-        return new User(userId, firstName, lastName, userNic, image, email, phoneNumber, address, password, active, userType);
+        String userTypeString = resultSet.getString("userType");
+
+        UserType userType = UserType.valueOf(userTypeString);
+
+        return new User(userId, firstName,
+                lastName, userNic, image, email, phoneNumber, address, password, active, userType);
     }
+
 }

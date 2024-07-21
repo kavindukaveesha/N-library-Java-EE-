@@ -1,5 +1,7 @@
 package com.team2.models;
 
+import com.team2.Enums.UserType;
+
 public class User {
 
     private int userId;
@@ -12,13 +14,13 @@ public class User {
     private String address;
     private String password;
     private boolean active;
-    private String userType;
+    private UserType userType;
 
     // Constructors
     public User() {
     }
 
-    public User(int userId, String firstName, String lastName, String userNic, String image, String email, String phoneNumber, String address, String password, boolean active, String userType) {
+    public User(int userId, String firstName, String lastName, String userNic, String image, String email, String phoneNumber, String address, String password, boolean active, UserType userType) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,9 +43,9 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
-
     }
 
+    // Getter and Setter methods
     public int getUserId() {
         return userId;
     }
@@ -124,12 +126,11 @@ public class User {
         this.active = active;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
-
 }

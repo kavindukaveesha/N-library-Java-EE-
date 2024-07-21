@@ -8,6 +8,7 @@ import com.team2.service.BookService;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
@@ -35,7 +36,7 @@ public class AdminBookController extends HttpServlet {
     private BookCategoryService categoryService;
 
 //    folder path
-    private static final String UPLOAD_PATH = "D:/SOFTWERE ENGENEERING/my programing/Java/Java EE/N_Library/N-Library/web/DBImages/";
+    private static final String UPLOAD_PATH = "D:/SOFTWERE ENGENEERING/My-Projects/N-library-Java-EE-/N-Library-personal/web/DBImages/";
 
     public AdminBookController() {
         this.bookService = new BookService();
@@ -120,8 +121,7 @@ public class AdminBookController extends HttpServlet {
         // Check for null or empty values
         if (title == null || title.isEmpty()
                 || bookId == null || bookId.isEmpty()
-                || author == null || author.isEmpty()
-                || description == null || description.isEmpty()) {
+                || author == null || author.isEmpty()) {
             request.setAttribute("status", "InsertFailed");
             request.setAttribute("error", "Please fill in all required fields.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/views/Admin/books/adminAddBook.jsp");
@@ -156,6 +156,9 @@ public class AdminBookController extends HttpServlet {
         } else {
             imageFileName = defaultImageFileName;
         }
+        
+//        PrintWriter out = response.getWriter();
+//        out.print(title+bookId+categoryId+description+author+imageFileName);
 
         // end of upload image
         // upload data to database

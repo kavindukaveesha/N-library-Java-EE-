@@ -15,7 +15,13 @@
         <link rel="stylesheet" href="<%=assetsUrl.giveUrl(request, "styles/admin.css")%>" />
 
         <style>
+            @media only screen and (max-width: 1024px) {
+                .header-small{
+                    font-size: 1.3rem;
+                }
 
+
+            }
         </style>
     </head>
 
@@ -23,12 +29,12 @@
         <%@ include file="/views/Admin/admincommon/sidebar.jspf" %>
 
         <div class="content">
-             <%@ include file="/views/Admin/admincommon/header.jsp" %>
+            <%@ include file="/views/Admin/admincommon/header.jsp" %>
 
             <div class="container form-container mt-5 p-3">
                 <div class="row">
-                    <div class="col-6" style="display: flex;">
-                        <h2>${student != null ? 'Update Student Data' : 'Student Registration'}</h2>
+                    <div class="col-6 col-sm-8" style="display: flex;">
+                        <h2 class="header-small">${student != null ? 'Update Student Data' : 'Student Registration'}</h2>
                         <% if (request.getAttribute("student") == null) { %>
                         <a class="btn btn-primary" href="/new" style="margin: 2% 2%">New Student</a>
                         <% } %>
@@ -69,14 +75,14 @@
                                             imageUrlDB = student.getImage();
                                         }
                                     %>
-                                    
+
 
                                     <% if (imageUrlDB != null) {%>
                                     <img src="<%= assetsUrl.giveUrl(request, "DBImages/") + imageUrlDB%>"
                                          style="width:5rem;height:5rem; margin-top: 10px;" id="previewImage" alt="Preview">
 
                                     <%  }%>
-                                    
+
                                     <input type="hidden" name="dbImage" value="<%=imageUrlDB%>">
 
 
@@ -174,7 +180,7 @@
                         "<p class='error'>Failed to update student. Please try again.</p>";
             }
 
-          
+
         </script>
     </body>
 
