@@ -1,7 +1,7 @@
 package com.team2.controller.utill;
 
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 /**
  *
  * @author Ashani

@@ -11,9 +11,9 @@ import java.sql.Statement;
 public class DBConnection {
 
     // Database connection details
-    private static final String url = "jdbc:mysql://localhost:3306/library_manage";
+    private static final String url = "jdbc:mysql://mysql:3306/library_manage";
     private static final String username = "root";
-    private static final String password = "";
+    private static final String password = "Kavindu12345";
 
     // Load the MySQL JDBC driver (static block for initialization)
     static {
@@ -31,23 +31,30 @@ public class DBConnection {
 
     // Prepare a statement
     public static PreparedStatement setStatment(String sql) throws SQLException {
-        Connection connection = null;
-        PreparedStatement stmt = null;
-
-        try {
-            connection = getConnection(); // Get the connection here
-            stmt = connection.prepareStatement(sql);
-        } catch (SQLException e) {
-            throw new SQLException("Connection failed: " + e.getMessage(), e);
-        } finally {
-            closeResources(connection, stmt);
-        }
-        return stmt;
+        Connection connection = getConnection();
+        return connection.prepareStatement(sql);
     }
 
     // Close database resources safely
     public static void closeResources(Connection con, PreparedStatement pst) {
         try {
+            if (pst != null) {
+                pst.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error in closing resources: " + ex.getMessage());
+        }
+    }
+    
+    // Close database resources safely including ResultSet
+    public static void closeResources(Connection con, PreparedStatement pst, ResultSet rs) {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
             if (pst != null) {
                 pst.close();
             }

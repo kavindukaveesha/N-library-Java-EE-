@@ -1,0 +1,23 @@
+{
+    "java.project.sourcePaths": ["src/java"],
+    "java.project.outputPath": "target/classes",
+    "java.project.referencedLibraries": [
+        "lib/*.jar",
+        "web/WEB-INF/lib/*.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.maven.downloadSources": true,
+    "java.maven.downloadJavadoc": true,
+    "tomcat.workspace": "${workspaceFolder}",
+    "tomcat.port": 8080,
+    "files.exclude": {
+        "build/": true,
+        "dist/": true,
+        "nbproject/": true,
+        "target/": true,
+        "**/.DS_Store": true
+    },
+    "java.server.launchMode": "Standard"
+}

@@ -6,20 +6,20 @@ import com.team2.models.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 public class UserService {
 
-    private static final String INSERT_QUERY = "INSERT INTO user (firstName, lastName, userNic, image, email, phoneNumber, address, password, active, userType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_QUERY = "UPDATE user SET firstName = ?, lastName = ?, userNic = ?, image = ?, email = ?, phoneNumber = ?, address = ? WHERE userId = ?";
-    private static final String DELETE_QUERY = "DELETE FROM user WHERE userId = ?";
-    private static final String SELECT_BY_ID_QUERY = "SELECT * FROM user WHERE userId = ?";
-    private static final String SELECT_ALL_QUERY = "SELECT * FROM user WHERE userType = ?"; // Added WHERE clause to filter by userType
-    private static final String SELECT_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email = ?";
-    private static final String CHANGE_USER_PASSWORD = "UPDATE user SET password = ? WHERE userId = ?";
-    private static final String SELECT_BY_STUDENTID = "SELECT * FROM user WHERE userType = ? AND userId = ?";
-    private static final String SELECT_BY_STUDENT_BY_FIRST_NAME = "SELECT * FROM user WHERE userType = ? AND firstName = ?";
-    private static final String SELECT_BY_STUDENT_BY_LAST_NAME = "SELECT * FROM user WHERE userType = ? AND lastName = ?";
+    private static final String INSERT_QUERY = "INSERT INTO users (firstName, lastName, userNic, image, email, phoneNumber, address, password, active, userType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_QUERY = "UPDATE users SET firstName = ?, lastName = ?, userNic = ?, image = ?, email = ?, phoneNumber = ?, address = ? WHERE userId = ?";
+    private static final String DELETE_QUERY = "DELETE FROM users WHERE userId = ?";
+    private static final String SELECT_BY_ID_QUERY = "SELECT * FROM users WHERE userId = ?";
+    private static final String SELECT_ALL_QUERY = "SELECT * FROM users WHERE userType = ?"; 
+    private static final String SELECT_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email = ?";
+    private static final String CHANGE_USER_PASSWORD = "UPDATE users SET password = ? WHERE userId = ?";
+    private static final String SELECT_BY_STUDENTID = "SELECT * FROM users WHERE userType = ? AND userId = ?";
+    private static final String SELECT_BY_STUDENT_BY_FIRST_NAME = "SELECT * FROM users WHERE userType = ? AND firstName = ?";
+    private static final String SELECT_BY_STUDENT_BY_LAST_NAME = "SELECT * FROM users WHERE userType = ? AND lastName = ?";
 
     // Add a new user
     public int addUser(User user) {

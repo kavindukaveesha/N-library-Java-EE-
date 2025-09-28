@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch N-Library Application",
+            "request": "launch",
+            "mainClass": "",
+            "projectName": "N-Library-personal"
+        },
+        {
+            "name": "Launch Tomcat",
+            "type": "java",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.apache.catalina.startup.Bootstrap",
+            "args": ["start"],
+            "vmArgs": [
+                "-Dcatalina.home=/usr/local/tomcat",
+                "-Dcatalina.base=${workspaceFolder}/tomcat-temp",
+                "-Djava.io.tmpdir=${workspaceFolder}/tomcat-temp/temp"
+            ]
+        }
+    ]
+}
